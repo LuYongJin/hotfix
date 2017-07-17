@@ -252,13 +252,13 @@ public class MyApp extends Application {
 
 6.在res目录创建xml目录，新建provider_paths.xml文件
 
-<?xml version="1.0" encoding="utf-8"?>
-<paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- /storage/emulated/0/Download/com.bugly.upgrade.demo/.beta/apk-->
-    <external-path name="beta_external_path" path="Download/"/>
-    <!--/storage/emulated/0/Android/data/com.bugly.upgrade.demo/files/apk/-->
-    <external-path name="beta_external_files_path" path="Android/data/"/>
-</paths>
+	<?xml version="1.0" encoding="utf-8"?>
+	<paths xmlns:android="http://schemas.android.com/apk/res/android">
+	    <!-- /storage/emulated/0/Download/com.bugly.upgrade.demo/.beta/apk-->
+	    <external-path name="beta_external_path" path="Download/"/>
+	    <!--/storage/emulated/0/Android/data/com.bugly.upgrade.demo/files/apk/-->
+	    <external-path name="beta_external_files_path" path="Android/data/"/>
+	</paths>
 
 7.根据基准包生成差分包，在bugly平台上下发，完成热修复流程。
 
