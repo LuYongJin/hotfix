@@ -161,26 +161,26 @@ domo地址：https://github.com/BuglyDevTeam/Bugly-Android-Demo
 
             @Override
             public void onDownloadReceived(long savedLength, long totalLength) {
-//                Toast.makeText(getApplicationContext(), String.format(Locale.getDefault(),
-//                        "%s %d%%",
-//                        Beta.strNotificationDownloading,
-//                        (int) (totalLength == 0 ? 0 : savedLength * 100 / totalLength)), Toast.LENGTH_SHORT).show();
+		//                Toast.makeText(getApplicationContext(), String.format(Locale.getDefault(),
+		//                        "%s %d%%",
+		//                        Beta.strNotificationDownloading,
+		//                        (int) (totalLength == 0 ? 0 : savedLength * 100 / totalLength)), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDownloadSuccess(String patchFilePath) {
-//                Toast.makeText(getApplicationContext(), patchFilePath, Toast.LENGTH_SHORT).show();
+	//                Toast.makeText(getApplicationContext(), patchFilePath, Toast.LENGTH_SHORT).show();
                 Beta.applyDownloadedPatch();
             }
 
             @Override
             public void onDownloadFailure(String msg) {
-//                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+	//                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onApplySuccess(String msg) {
-//                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+	//                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -190,14 +190,14 @@ domo地址：https://github.com/BuglyDevTeam/Bugly-Android-Demo
 
             @Override
             public void onPatchRollback() {
-//                Toast.makeText(getApplicationContext(), "onPatchRollback", Toast.LENGTH_SHORT).show();
+	//                Toast.makeText(getApplicationContext(), "onPatchRollback", Toast.LENGTH_SHORT).show();
             }
-            };
-            // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId,调试时将第三个参数设置为true
-            Bugly.init(this, "aa20469483", true);
+		    };
+			// 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId,调试时将第三个参数设置为true
+			Bugly.init(this, "aa20469483", true);
 
-    }
-}
+	    }
+	}
 
 
 5. 清单文件添加权限和组件
