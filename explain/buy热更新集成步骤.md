@@ -4,45 +4,45 @@ domo地址：https://github.com/BuglyDevTeam/Bugly-Android-Demo
 
 1.工程根目录下“build.gradle”文件中添加：
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        // 只需配置tinker-support插件依赖，无需再依赖tinker插件
-        classpath 'com.tencent.bugly:tinker-support:1.0.8'
-    }
-}
+	buildscript {
+	    repositories {
+		jcenter()
+	    }
+	    dependencies {
+		classpath 'com.android.tools.build:gradle:2.2.3'
+		// 只需配置tinker-support插件依赖，无需再依赖tinker插件
+		classpath 'com.tencent.bugly:tinker-support:1.0.8'
+	    }
+	}
 
 2.在app module的“build.gradle”文件中添加（示例配置）：
 
-dependencies {
+	dependencies {
 
-    // 多dex配置
-    compile 'com.android.support:multidex:1.0.1'
-    // 远程依赖集成方式（推荐）
-    compile 'com.tencent.bugly:crashreport_upgrade:1.3.1'
-}
-// 依赖插件脚本
-apply from: 'tinker-support.gradle'
+	    // 多dex配置
+	    compile 'com.android.support:multidex:1.0.1'
+	    // 远程依赖集成方式（推荐）
+	    compile 'com.tencent.bugly:crashreport_upgrade:1.3.1'
+	}
+	// 依赖插件脚本
+	apply from: 'tinker-support.gradle'
 
 3.在app目录下创建tinker-support.gradle这个文件
 
 
-apply plugin: 'com.tencent.bugly.tinker-support'
+	apply plugin: 'com.tencent.bugly.tinker-support'
 
-def bakPath = file("${buildDir}/bakApk/")
+	def bakPath = file("${buildDir}/bakApk/")
 
-/**
- * 此处填写每次构建生成的基准包目录  **注意每次构建基准包或生成差分包时修改。。
- */
-def baseApkDir = "app-0717-11-31-54"
+	/**
+	 * 此处填写每次构建生成的基准包目录  **注意每次构建基准包或生成差分包时修改。。
+	 */
+	def baseApkDir = "app-0717-11-31-54"
 
-/**
- * 对于插件各参数的详细解析请参考
- */
-tinkerSupport {
+	/**
+	 * 对于插件各参数的详细解析请参考
+	 */
+	tinkerSupport {
 
     // 开启tinker-support插件，默认值true
     enable = true
@@ -80,48 +80,48 @@ tinkerSupport {
     // 是否采用反射Application的方式集成，无须改造Application
     enableProxyApplication = true
 
-}
+	}
 
-/**
- * 一般来说,我们无需对下面的参数做任何的修改
- * 对于各参数的详细介绍请参考:
- * https://github.com/Tencent/tinker/wiki/Tinker-%E6%8E%A5%E5%85%A5%E6%8C%87%E5%8D%97
- */
-tinkerPatch {
-    tinkerEnable = true
-    ignoreWarning = false
-    useSign = true
-    dex {
-        dexMode = "jar"
-        pattern = ["classes*.dex"]
-        loader = []
-    }
-    lib {
-        pattern = ["lib/*/*.so"]
-    }
+	/**
+	 * 一般来说,我们无需对下面的参数做任何的修改
+	 * 对于各参数的详细介绍请参考:
+	 * https://github.com/Tencent/tinker/wiki/Tinker-%E6%8E%A5%E5%85%A5%E6%8C%87%E5%8D%97
+	 */
+	tinkerPatch {
+	    tinkerEnable = true
+	    ignoreWarning = false
+	    useSign = true
+	    dex {
+		dexMode = "jar"
+		pattern = ["classes*.dex"]
+		loader = []
+	    }
+	    lib {
+		pattern = ["lib/*/*.so"]
+	    }
 
-    res {
-        pattern = ["res/*", "r/*", "assets/*", "resources.arsc", "AndroidManifest.xml"]
-        ignoreChange = []
-        largeModSize = 100
-    }
+	    res {
+		pattern = ["res/*", "r/*", "assets/*", "resources.arsc", "AndroidManifest.xml"]
+		ignoreChange = []
+		largeModSize = 100
+	    }
 
-    packageConfig {
-    }
-    sevenZip {
-        zipArtifact = "com.tencent.mm:SevenZip:1.1.10"
-//        path = "/usr/local/bin/7za"
-    }
-    buildConfig {
-        keepDexApply = false
-//      tinkerId = "base-2.0.1"
-    }
-}
+	    packageConfig {
+	    }
+	    sevenZip {
+		zipArtifact = "com.tencent.mm:SevenZip:1.1.10"
+	//        path = "/usr/local/bin/7za"
+	    }
+	    buildConfig {
+		keepDexApply = false
+	//      tinkerId = "base-2.0.1"
+	    }
+	}
 
 
 4.定义自己的Application类并集成buglysdk
 
-public class MyApp extends Application {
+    public class MyApp extends Application {
 
     @Override
     public void onCreate() {
@@ -192,9 +192,9 @@ public class MyApp extends Application {
             public void onPatchRollback() {
 //                Toast.makeText(getApplicationContext(), "onPatchRollback", Toast.LENGTH_SHORT).show();
             }
-        };
-        // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId,调试时将第三个参数设置为true
-        Bugly.init(this, "aa20469483", true);
+            };
+            // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId,调试时将第三个参数设置为true
+            Bugly.init(this, "aa20469483", true);
 
     }
 }
@@ -202,52 +202,52 @@ public class MyApp extends Application {
 
 5. 清单文件添加权限和组件
 
-	<----------------------------添加-------------------------------------->
-
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-	<------------------------------------------------------------------>
-
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:name=".MyApp" //**修改为自己定义的application类
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
 		<----------------------------添加-------------------------------------->
 
-        <activity
-            android:name="com.tencent.bugly.beta.ui.BetaActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|locale"
-            android:theme="@android:style/Theme.Translucent" />
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
-        </provider>
+		<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+		<uses-permission android:name="android.permission.INTERNET" />
+		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+		<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+		<uses-permission android:name="android.permission.READ_LOGS" />
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 		<------------------------------------------------------------------>
-    </application>
+
+	    <application
+		android:allowBackup="true"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:roundIcon="@mipmap/ic_launcher_round"
+		android:supportsRtl="true"
+		android:name=".MyApp" //**修改为自己定义的application类
+		android:theme="@style/AppTheme">
+		<activity android:name=".MainActivity">
+		    <intent-filter>
+			<action android:name="android.intent.action.MAIN" />
+
+			<category android:name="android.intent.category.LAUNCHER" />
+		    </intent-filter>
+		</activity>
+
+			<----------------------------添加-------------------------------------->
+
+		<activity
+		    android:name="com.tencent.bugly.beta.ui.BetaActivity"
+		    android:configChanges="keyboardHidden|orientation|screenSize|locale"
+		    android:theme="@android:style/Theme.Translucent" />
+
+		<provider
+		    android:name="android.support.v4.content.FileProvider"
+		    android:authorities="${applicationId}.fileProvider"
+		    android:exported="false"
+		    android:grantUriPermissions="true">
+		    <meta-data
+			android:name="android.support.FILE_PROVIDER_PATHS"
+			android:resource="@xml/provider_paths"/>
+		</provider>
+
+			<------------------------------------------------------------------>
+	    </application>
 
 
 6.在res目录创建xml目录，新建provider_paths.xml文件
