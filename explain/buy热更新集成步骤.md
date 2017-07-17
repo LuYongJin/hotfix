@@ -156,7 +156,7 @@ domo地址：https://github.com/BuglyDevTeam/Bugly-Android-Demo
         Beta.betaPatchListener = new BetaPatchListener() {
             @Override
             public void onPatchReceived(String patchFileUrl) {
-//                Toast.makeText(getApplicationContext(), patchFileUrl, Toast.LENGTH_SHORT).show();
+	//                Toast.makeText(getApplicationContext(), patchFileUrl, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -185,7 +185,7 @@ domo地址：https://github.com/BuglyDevTeam/Bugly-Android-Demo
 
             @Override
             public void onApplyFailure(String msg) {
-//                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+	//                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             }
 
             @Override
